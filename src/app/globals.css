@@ -88,3 +88,11 @@ body {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+.search-input:focus {
+  outline: 5px solid #007af6;
+}
+.account-input:focus {
+  outline: 5px solid #007af6;
+  border: 1px solid #007af6;
+}

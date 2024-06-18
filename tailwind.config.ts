@@ -13,6 +13,8 @@ const config: Config = {
         },
         secondary: {
           500: "#FFFFFFCC",
+          600: "#5B616E",
+          700: "#E7F0F8",
           800: "#171B21",
         },
         "black-40": "rgba(0, 0, 0, 0.4)",

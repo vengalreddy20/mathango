@@ -1,39 +1,58 @@
+import Image from "next/image";
 import React from "react";
-
+type Recipe = {
+  image: string;
+  title: string;
+  readyInMinutes: number;
+};
 type RecipeCardProps = {
-  title?: string;
-  recipes: any[];
+  recipe: Recipe;
+  layout?: string;
 };
 
-const RecipeCard = ({ title, recipes = [] }: RecipeCardProps) => {
+const RecipeCard = ({ layout = "RAIL", recipe }: RecipeCardProps) => {
   return (
     <>
-      {title && (
-        <h2 className="py-4  font-bold text-secondary-800 text-base capitalize">
-          {title}
-        </h2>
-      )}
-      <div className="flex gap-x-6 overflow-y-auto no-scrollbar">
-        {recipes.map((recipe, index) => (
-          <div className="w-[160px]" key={index}>
-            <div
-              style={{
-                backgroundImage: `url('${recipe.image}')`,
-              }}
-              className="bg-cover bg-no-repeat rounded-lg h-[160px] w-[160px]"
-            >
-              <div className="flex flex-col justify-end px-2 py-4 h-full bg-black-50">
-                <h3 className="text-white capitalize font-semibold text-sm pb-2 line-clamp-1">
-                  {recipe.name}
-                </h3>
-                <p className="text-secondary-500 text-xs font-normal">
-                  Ready in {recipe.time} mins
-                </p>
-              </div>
+      {layout === "RAIL" ? (
+        <div className="w-[160px]">
+          <div
+            style={{
+              backgroundImage: `url('${recipe.image}')`,
+            }}
+            className="bg-cover bg-no-repeat rounded-lg h-[160px] w-[160px]"
+          >
+            <div className="flex flex-col justify-end px-2 py-4 h-full bg-black-50">
+              <h3 className="text-white capitalize font-semibold text-sm line-clamp-1">
+                {recipe.title}
+              </h3>
+              <p className="text-secondary-500 text-xs font-normal pt-2">
+                Ready in {recipe.readyInMinutes} mins
+              </p>
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      ) : (
+        <div className="bg-white  grid grid-cols-4 gap-x-4  rounded-md ">
+          <div className="relative h-[100px] w-[100px] col-span-1 ">
+            <Image
+              src={recipe.image}
+              alt={`${recipe.title}`}
+              fill
+              priority
+              className="rounded-bl-md rounded-tl-md "
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          </div>
+          <div className="px-4 py-1 col-span-3 flex flex-col justify-center">
+            <h3 className="text-black capitalize font-semibold text-sm line-clamp-1">
+              {recipe.title}
+            </h3>
+            <p className="text-black text-xs font-normal pt-2">
+              Ready in {recipe.readyInMinutes} mins
+            </p>
+          </div>
+        </div>
+      )}
     </>
   );
 };

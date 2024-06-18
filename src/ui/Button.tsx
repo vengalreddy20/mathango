@@ -23,7 +23,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 
   const rootClassName = clsx(
     {
-      "bg-primary-900": variant === "primary",
+      "bg-primary-900 w-full text-white py-3 px-10 rounded-xl text-base font-semibold lg:rounded-lg lg:w-auto ":
+        variant === "primary",
     },
     className
   );
