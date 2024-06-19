@@ -38,9 +38,7 @@ function SearchBarInput({
 }: IProps) {
   const searchRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
-  useEffect(() => {
-    if (autoFocus) searchRef && searchRef.current.focus();
-  }, [autoFocus]);
+
   const handleBack = () => {
     router.back();
   };
