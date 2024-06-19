@@ -12,6 +12,7 @@ export default async function Home() {
     image: item.image,
     title: item.title,
     readyInMinutes: item.readyInMinutes,
+    id: item.id,
   }));
   return (
     <Container>

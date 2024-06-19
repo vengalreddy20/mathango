@@ -9,7 +9,7 @@ const Ingredients = ({ recipeInfo }: any) => {
       id: 1,
       title: "Ingredients",
       content: (
-        <div className="grid grid-cols-3 py-4 gap-3">
+        <div className="grid grid-cols-3 py-4 gap-3 h-56 overflow-y-auto no-scrollbar">
           {recipeInfo?.missedIngredients.map(
             (ingredient: any, index: number) => (
               <Ingredient ingredient={ingredient} key={index} />

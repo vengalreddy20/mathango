@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import clsx from "clsx";
+import { useRouter } from "next/navigation";
 
 type IProps = {
   placeholder: string | any;
@@ -11,16 +12,12 @@ type IProps = {
   lefticon?: any;
   closeIcon?: any;
   className: string;
-  handleFilter?: any;
   onChange?: any;
   onKeyDown?: any;
   onClearSearch?: any;
   value?: string | undefined | null;
   autoFocus?: boolean;
   onFocus?: () => void;
-  onClick?: () => void;
-  handleBack?: () => void;
-  onVoiceSearch?: () => void;
 };
 
 function SearchBarInput({
@@ -36,17 +33,17 @@ function SearchBarInput({
   onClearSearch,
   value,
   onFocus,
-  onClick,
-  handleBack,
-  onVoiceSearch,
+
   autoFocus = false,
 }: IProps) {
   const searchRef = useRef<HTMLInputElement>(null);
-
+  const router = useRouter();
   useEffect(() => {
     if (autoFocus) searchRef.current.focus();
   }, [autoFocus]);
-
+  const handleBack = () => {
+    router.back();
+  };
   return (
     <div className="py-2 ">
       <div className="relative rounded-xl">
@@ -74,8 +71,7 @@ function SearchBarInput({
             placeholder={placeholder}
             onChange={onChange}
             onKeyDown={onKeyDown}
-            value={value}
-            onClick={onClick}
+            value={value!}
             autoComplete="off"
             onFocus={onFocus}
             ref={searchRef}
