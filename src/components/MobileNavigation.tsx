@@ -5,7 +5,7 @@ import Image from "next/image";
 
 function MobileNavigation() {
   return (
-    <div className="flex cursor-pointer justify-evenly bg-white py-5 fixed bottom-0 left-0 right-0 z-10 ">
+    <div className="lg:hidden flex cursor-pointer justify-evenly bg-white py-5 fixed bottom-0 left-0 right-0 z-10 ">
       <Image
         src={home}
         alt="home"

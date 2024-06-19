@@ -90,9 +90,24 @@ body {
 }
 
 .search-input:focus {
-  outline: 5px solid #007af6;
+  outline: 2px solid #007af6;
 }
 .account-input:focus {
-  outline: 5px solid #007af6;
+  outline: 2px solid #007af6;
   border: 1px solid #007af6;
+}
+
+.sticky-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background-color: white;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-hidden {
+  display: none;
 }

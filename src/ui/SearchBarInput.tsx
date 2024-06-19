@@ -18,6 +18,7 @@ type IProps = {
   value?: string | undefined | null;
   autoFocus?: boolean;
   onFocus?: () => void;
+  onClick?: any;
 };
 
 function SearchBarInput({
@@ -33,8 +34,7 @@ function SearchBarInput({
   onClearSearch,
   value,
   onFocus,
-
-  autoFocus = false,
+  onClick,
 }: IProps) {
   const searchRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
@@ -47,7 +47,7 @@ function SearchBarInput({
       <div className="relative rounded-xl">
         {lefticon ? (
           <div className="z-20 absolute inset-y-0 left-0 flex items-center pl-3">
-            <span className="text-gray-500 sm:text-sm">
+            <span className="text-gray-500 cursor-pointer sm:text-sm">
               <Image
                 src={lefticon}
                 width={20}
@@ -70,6 +70,7 @@ function SearchBarInput({
             onChange={onChange}
             onKeyDown={onKeyDown}
             value={value!}
+            onClick={onClick}
             autoComplete="off"
             onFocus={onFocus}
             ref={searchRef}
@@ -78,7 +79,10 @@ function SearchBarInput({
 
         {closeIcon ? (
           <div className="absolute inset-y-2 right-0 flex items-center  pr-3">
-            <span aria-hidden className="text-gray-500 sm:text-sm">
+            <span
+              aria-hidden
+              className="text-gray-500 sm:text-sm cursor-pointer"
+            >
               <Image
                 src={closeIcon}
                 onClick={onClearSearch}

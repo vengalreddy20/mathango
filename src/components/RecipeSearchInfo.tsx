@@ -14,7 +14,7 @@ const RecipeSearchInfo = ({ recipeInfo }: RecipeSearchInfoProps) => {
       {showIngredients ? (
         <Ingredients recipeInfo={recipeInfo} />
       ) : (
-        <div className="pb-6">
+        <div className="pb-6 lg:h-[440px] overflow-y-auto no-scrollbar">
           <div className="w-full h-[360px] relative">
             <Image
               src={recipeInfo?.image}
@@ -46,7 +46,7 @@ const RecipeSearchInfo = ({ recipeInfo }: RecipeSearchInfoProps) => {
               </p>
             </div>
           </div>
-          <div className="mx-4">
+          <div className="mx-4 ">
             <Button
               onClick={() => {
                 setShowIngredients(true);

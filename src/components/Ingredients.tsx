@@ -10,7 +10,7 @@ const Ingredients = ({ recipeInfo }: any) => {
       title: "Ingredients",
       content: (
         <div className="grid grid-cols-3 py-4 gap-3 h-56 overflow-y-auto no-scrollbar">
-          {recipeInfo?.missedIngredients.map(
+          {recipeInfo?.missedIngredients?.map(
             (ingredient: any, index: number) => (
               <Ingredient ingredient={ingredient} key={index} />
             )
@@ -31,7 +31,7 @@ const Ingredients = ({ recipeInfo }: any) => {
     },
   ];
   return (
-    <div className="px-4">
+    <div className="px-4 h-screen lg:h-[440px]  overflow-y-auto no-scrollbar">
       {faq?.map((item, index) => (
         <Accordion key={`${item.title}-${index}`} item={item} />
       ))}

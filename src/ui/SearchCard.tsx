@@ -22,7 +22,7 @@ const SearchCard = ({ recipe }: SearchCardProps) => {
   return (
     <>
       <div
-        className="flex gap-3 my-3 bg-white py-4 cursor-pointer px-5 rounded-lg"
+        className="flex relative gap-3 my-3 bg-white py-4 cursor-pointer px-5 rounded-lg"
         onClick={() => handleOpenRecipeInfo(recipe)}
       >
         <Image
@@ -38,6 +38,7 @@ const SearchCard = ({ recipe }: SearchCardProps) => {
         open={isOpen}
         onClose={() => setIsOpen(false)}
         title={recipeInfo?.title}
+        recipeInfo={recipeInfo}
       >
         <RecipeSearchInfo recipeInfo={recipeInfo} />
       </Modal>
