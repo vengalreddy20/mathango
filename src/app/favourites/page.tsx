@@ -6,7 +6,8 @@ import Container from "@/ui/Container";
 import React from "react";
 
 const Favourites = () => {
-  const recipes = getDataFromLocalStorage("Favourites");
+  const recipes =
+    typeof window !== "undefined" && getDataFromLocalStorage("Favourites");
   console.log("recipes in favourites", recipes);
   return (
     <Container>
