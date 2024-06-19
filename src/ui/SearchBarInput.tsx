@@ -39,7 +39,7 @@ function SearchBarInput({
   const searchRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   useEffect(() => {
-    if (autoFocus) searchRef.current.focus();
+    if (autoFocus) searchRef && searchRef.current.focus();
   }, [autoFocus]);
   const handleBack = () => {
     router.back();
