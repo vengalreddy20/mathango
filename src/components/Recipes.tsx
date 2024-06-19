@@ -8,7 +8,7 @@ type RecipesProps = {
   layout?: string;
 };
 
-const Recipes = ({ recipes, title, layout }: RecipesProps) => {
+const Recipes = ({ recipes = [], title, layout }: RecipesProps) => {
   return (
     <div className="py-4">
       {title && (
