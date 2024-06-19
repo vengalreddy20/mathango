@@ -1,3 +1,4 @@
+"use client";
 import {
   Dialog,
   DialogPanel,
@@ -5,21 +6,24 @@ import {
   Transition,
 } from "@headlessui/react";
 import Image from "next/image";
-import { Fragment, ReactNode } from "react";
+import { Fragment, ReactNode, useEffect, useState } from "react";
 import backArrow from "../../../public/images/arrow_circle.svg";
 import heart from "../../../public/images/Heart.svg";
+import heartFilled from "../../../public/images/heart_filled.svg";
+
 import {
   getDataFromLocalStorage,
   setDataFromLocalStorage,
 } from "@/hooks/useLocalStorage";
+import { AnyAaaaRecord } from "dns";
 
 type ModalProps = {
   open: boolean;
   children: ReactNode;
   onClose: () => void;
   title?: string;
-  description?: string;
-  recipeInfo?: {};
+  description?: any;
+  recipeInfo?: any;
   variant?: string;
 };
 
@@ -32,6 +36,7 @@ export default function Modal({
   recipeInfo,
   variant = "bottom",
 }: ModalProps) {
+  const [isFavorite, setIsFavorite] = useState(false);
   const handleAddtoWishlist = (data: any) => {
     const { id, title, readyInMinutes, image } = data;
 
@@ -56,6 +61,15 @@ export default function Modal({
       ]);
     }
   };
+  useEffect(() => {
+    const existingFavouritesArray = getDataFromLocalStorage("Favourites") || [];
+    const foundIndex = existingFavouritesArray?.findIndex(
+      (item: any) => item?.id === recipeInfo.id
+    );
+    if (foundIndex !== -1) {
+      setIsFavorite(true);
+    }
+  }, [recipeInfo.id]);
   return (
     <Transition appear show={open} as={Fragment}>
       <Dialog
@@ -103,7 +117,7 @@ export default function Modal({
                 )}
               </div>
               <Image
-                src={heart}
+                src={isFavorite ? heartFilled : heart}
                 alt="heart"
                 width={24}
                 height={24}

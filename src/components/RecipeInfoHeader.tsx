@@ -1,7 +1,9 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import heart from "../../public/images/Heart.svg";
+import heartFilled from "../../public/images/heart_filled.svg";
+
 import arrowCircle from "../../public/images/arrow_circle.svg";
 import { useRouter } from "next/navigation";
 import {
@@ -10,6 +12,7 @@ import {
 } from "@/hooks/useLocalStorage";
 const RecipeInfoHeader = ({ recipeInfo }: any) => {
   const router = useRouter();
+  const [isFavorite, setIsFavorite] = useState(false);
   const handleBack = () => {
     router.back();
   };
@@ -37,6 +40,15 @@ const RecipeInfoHeader = ({ recipeInfo }: any) => {
       ]);
     }
   };
+  useEffect(() => {
+    const existingFavouritesArray = getDataFromLocalStorage("Favourites") || [];
+    const foundIndex = existingFavouritesArray?.findIndex(
+      (item: any) => item?.id === recipeInfo.id
+    );
+    if (foundIndex !== -1) {
+      setIsFavorite(true);
+    }
+  }, [recipeInfo.id]);
   return (
     <div className="relative  overflow-hidden text-white shadow-lg  bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
       <div style={{ width: "100%", overflow: "hidden" }}>
@@ -54,7 +66,7 @@ const RecipeInfoHeader = ({ recipeInfo }: any) => {
         >
           <div className="flex justify-center items-center h-full">
             <Image
-              src={heart}
+              src={isFavorite ? heartFilled : heart}
               alt="heart"
               width={30}
               height={30}

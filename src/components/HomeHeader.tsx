@@ -33,15 +33,19 @@ const HomeHeader = () => {
   };
 
   const handleScroll = () => {
-    if (window.scrollY > 0) {
-      setIsSticky(true);
-    } else {
-      setIsSticky(false);
+    if (width && width >= 1024) {
+      if (window.scrollY > 0) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
     }
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    if (width && width >= 1024) {
+      window.addEventListener("scroll", handleScroll);
+    }
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };

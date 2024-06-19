@@ -1,4 +1,5 @@
 "use client";
+import MobileNavigation from "@/components/MobileNavigation";
 import Recipes from "@/components/Recipes";
 import { getDataFromLocalStorage } from "@/hooks/useLocalStorage";
 import Container from "@/ui/Container";
@@ -9,9 +10,8 @@ const Favourites = () => {
   console.log("recipes in favourites", recipes);
   return (
     <Container>
-      <div>
-        <Recipes recipes={recipes} title="Favourites" layout="GRID" />
-      </div>
+      <Recipes recipes={recipes} title="Favourites" layout="GRID" />
+      <MobileNavigation />
     </Container>
   );
 };

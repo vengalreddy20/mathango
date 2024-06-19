@@ -46,7 +46,7 @@ function SearchBarInput({
     <div className="py-2 ">
       <div className="relative rounded-xl">
         {lefticon ? (
-          <div className="z-20 absolute inset-y-0 left-0 flex items-center pl-3">
+          <div className="z-10 absolute inset-y-0 left-0 flex items-center pl-3">
             <span className="text-gray-500 cursor-pointer sm:text-sm">
               <Image
                 src={lefticon}
