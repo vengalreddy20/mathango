@@ -147,8 +147,8 @@ const HomeHeader = () => {
       {searchList?.length > 0 && (
         <div className="fixed inset-0 top-[60px] p-4 bg-black bg-opacity-60 text-white rounded-lg shadow-lg overflow-y-auto z-50">
           <div className="relative flex flex-col items-end">
-            {searchList.map((recipe: any) => (
-              <div className="w-[400px] " key={recipe.id}>
+            {searchList.map((recipe: any, index) => (
+              <div className="w-[400px] " key={index}>
                 <SearchCard recipe={recipe} />
               </div>
             ))}

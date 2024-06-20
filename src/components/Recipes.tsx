@@ -23,7 +23,7 @@ const Recipes = ({ recipes = [], title, layout }: RecipesProps) => {
             : "grid grid-cols-1 gap-y-4 lg:grid-cols-3 md:grid-cols-2 md:gap-x-2 lg:gap-x-4  "
         )}
       >
-        {recipes.map((recipe: any, index: number) => (
+        {recipes?.map((recipe: any, index: number) => (
           <RecipiCard recipe={recipe} key={index} layout={layout} />
         ))}
       </div>

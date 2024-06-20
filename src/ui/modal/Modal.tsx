@@ -69,7 +69,7 @@ export default function Modal({
     if (foundIndex !== -1) {
       setIsFavorite(true);
     }
-  }, [recipeInfo.id]);
+  }, [recipeInfo?.id]);
   return (
     <Transition appear show={open} as={Fragment}>
       <Dialog
