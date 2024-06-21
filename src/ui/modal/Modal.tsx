@@ -10,12 +10,8 @@ import { Fragment, ReactNode, useEffect, useState } from "react";
 import backArrow from "../../../public/images/arrow_circle.svg";
 import heart from "../../../public/images/Heart.svg";
 import heartFilled from "../../../public/images/heart_filled.svg";
-
-import {
-  getDataFromLocalStorage,
-  setDataFromLocalStorage,
-} from "@/hooks/useLocalStorage";
-import { AnyAaaaRecord } from "dns";
+import { useFavourites } from "@/contexts/favourites/FavouritesContext";
+import { generateFavouritesItem } from "@/app/utils/generateFavouritesItem";
 
 type ModalProps = {
   open: boolean;
@@ -36,40 +32,17 @@ export default function Modal({
   recipeInfo,
   variant = "bottom",
 }: ModalProps) {
-  const [isFavorite, setIsFavorite] = useState(false);
-  const handleAddtoWishlist = (data: any) => {
-    const { id, title, readyInMinutes, image } = data;
+  const { isInFavourites, addItemToFavourites, removeItemFromFavourites } =
+    useFavourites();
+  const item = generateFavouritesItem(recipeInfo && recipeInfo);
 
-    let array = [];
-    const existingFavouritesArray = getDataFromLocalStorage("Favourites") || [];
-    console.log("existingFavouritesArray", existingFavouritesArray);
-    const foundIndex = existingFavouritesArray?.findIndex(
-      (item: any) => item?.id === id
-    );
-    console.log("filteredArray", foundIndex);
-    if (foundIndex !== -1) {
-      existingFavouritesArray?.splice(foundIndex, 1);
-
-      setDataFromLocalStorage("Favourites", existingFavouritesArray);
-    } else {
-      if (id && title && readyInMinutes) {
-        array.push({ id, title, readyInMinutes, image });
-      }
-      setDataFromLocalStorage("Favourites", [
-        ...existingFavouritesArray,
-        ...array,
-      ]);
-    }
+  const handleAddtoWishlist = () => {
+    addItemToFavourites(item);
   };
-  useEffect(() => {
-    const existingFavouritesArray = getDataFromLocalStorage("Favourites") || [];
-    const foundIndex = existingFavouritesArray?.findIndex(
-      (item: any) => item?.id === recipeInfo.id
-    );
-    if (foundIndex !== -1) {
-      setIsFavorite(true);
-    }
-  }, [recipeInfo?.id]);
+  const handleRemoveFromWishlist = (id: number) => {
+    removeItemFromFavourites(id);
+  };
+
   return (
     <Transition appear show={open} as={Fragment}>
       <Dialog
@@ -116,14 +89,27 @@ export default function Modal({
                   </DialogTitle>
                 )}
               </div>
-              <Image
-                src={isFavorite ? heartFilled : heart}
-                alt="heart"
-                width={24}
-                height={24}
-                className="cursor-pointer"
-                onClick={() => handleAddtoWishlist(recipeInfo)}
-              />
+              {isInFavourites(recipeInfo?.id) ? (
+                <>
+                  <Image
+                    src={heartFilled}
+                    alt="heart"
+                    width={30}
+                    height={30}
+                    className="text-center"
+                    onClick={() => handleRemoveFromWishlist(recipeInfo.id)}
+                  />
+                </>
+              ) : (
+                <Image
+                  src={heart}
+                  alt="heart"
+                  width={30}
+                  height={30}
+                  className="text-center"
+                  onClick={handleAddtoWishlist}
+                />
+              )}
             </div>
 
             {description && (

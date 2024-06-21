@@ -34,14 +34,16 @@ const SearchCard = ({ recipe }: SearchCardProps) => {
         />
         <p className="text-sm font-medium text-black">{recipe.title}</p>
       </div>
-      <Modal
-        open={isOpen}
-        onClose={() => setIsOpen(false)}
-        title={recipeInfo?.title}
-        recipeInfo={recipeInfo}
-      >
-        <RecipeSearchInfo recipeInfo={recipeInfo} />
-      </Modal>
+      {isOpen && (
+        <Modal
+          open={isOpen}
+          onClose={() => setIsOpen(false)}
+          title={recipeInfo?.title}
+          recipeInfo={recipeInfo}
+        >
+          <RecipeSearchInfo recipeInfo={recipeInfo} />
+        </Modal>
+      )}
     </>
   );
 };

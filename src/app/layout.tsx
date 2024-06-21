@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { FavouritesProvider } from "@/contexts/favourites/FavouritesContext";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <FavouritesProvider>
+        <body>{children}</body>
+      </FavouritesProvider>
     </html>
   );
 }
